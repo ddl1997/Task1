@@ -1,5 +1,8 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 public class CreateExcel {
@@ -7,7 +10,14 @@ public class CreateExcel {
 	public static void create_excel(String sql)
 	{
 		Connection conn = getConn();
-		
+		try {
+			PreparedStatement ps = (PreparedStatement)conn.prepareStatement(sql);
+			ResultSet rs = (ResultSet) ps.executeQuery();
+			String[] titles;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	
