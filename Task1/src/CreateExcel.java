@@ -14,7 +14,7 @@ import jxl.write.WritableWorkbook;
 
 public class CreateExcel {
 	
-	public void create_excel(String sql)
+	public String create_excel(String sql)
 	{
 		WritableWorkbook workbook = null;
 		String fileName = "temp.xls";
@@ -72,14 +72,7 @@ public class CreateExcel {
 			}
         }
 		
-		System.out.println(file.getPath());
-		System.out.println(file.getAbsolutePath());
-		try {
-			System.out.println(file.getCanonicalPath());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		return file.getAbsolutePath();
 		
 	}
 	
@@ -102,7 +95,7 @@ public class CreateExcel {
 	
 	public static void main(String[] args)
 	{
-		new CreateExcel().create_excel("SELECT * FROM table_1;");
+		System.out.println(new CreateExcel().create_excel("SELECT * FROM table_1;"));
 	}
 
 }
