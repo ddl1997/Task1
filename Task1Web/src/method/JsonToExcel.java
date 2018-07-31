@@ -99,27 +99,27 @@ public class JsonToExcel {
 		return map;
 	}
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		File file = new File("D:"+ File.separator +"1.xls");
-		String excelpath = file.getAbsolutePath();
-		InputStream is = null;
-		try {
-			is = new FileInputStream(excelpath);
-			String temp = ExcelToJson.excel_to_json(is);
-			System.out.println(temp);
-			System.out.println(json_to_excel(JSONObject.fromObject(temp)));
-			is.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				is.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	}
+//	public static void main(String[] args) {
+//		// TODO Auto-generated method stub
+//		File file = new File("D:"+ File.separator +"1.xls");
+//		String excelpath = file.getAbsolutePath();
+//		InputStream is = null;
+//		try {
+//			is = new FileInputStream(excelpath);
+//			String temp = ExcelToJson.excel_to_json(is);
+//			System.out.println(temp);
+//			System.out.println(json_to_excel(JSONObject.fromObject(temp)));
+//			is.close();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			try {
+//				is.close();
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
+//	}
 
 }
