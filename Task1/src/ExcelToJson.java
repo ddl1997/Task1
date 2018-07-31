@@ -1,11 +1,10 @@
 //import java.io.File;
 //import java.io.FileInputStream;
 //import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import jxl.Sheet;
 import jxl.Workbook;
-import jxl.read.biff.BiffException;
+
 
 public class ExcelToJson {
 	
@@ -16,9 +15,9 @@ public class ExcelToJson {
 			return "";
 		}
 		String result  = "{ ";
-		
+		Workbook wb = null;
 		try {
-			Workbook wb = Workbook.getWorkbook(input);
+			wb = Workbook.getWorkbook(input);
 			int sheet_size = wb.getNumberOfSheets();
 			for (int i = 0; i < sheet_size; i++)
 			{
@@ -43,12 +42,11 @@ public class ExcelToJson {
 			}
 			result += "}";
 			
-		} catch (BiffException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} finally {
+			if (wb != null)
+				wb.close();
 		}
 		
 		return result;

@@ -43,7 +43,7 @@ public class CreateExcel {
 			
 			WritableSheet s = null;
 			int sheetCount = workbook.getNumberOfSheets();
-			s = workbook.createSheet("Sheet" + sheetCount, sheetCount);
+			s = workbook.createSheet("Sheet" + (sheetCount + 1), sheetCount);
 			for (int i = 0; i < rsmd.getColumnCount(); i++)
 			{
 				Label label = new Label(i, 0, rsmd.getColumnName(i + 1));
