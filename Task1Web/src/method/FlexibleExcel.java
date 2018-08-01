@@ -51,9 +51,9 @@ public class FlexibleExcel {
 				List<Cell> cells = sheets.get(i);
 				for (Cell c : cells)
 				{
-					Label l = new Label(c.initY, c.initX, c.content);
-					ws.addCell(l);
+					Label l = new Label(c.initX, c.initY, c.content);
 					ws.mergeCells(c.initX, c.initY, c.initX + c.width - 1, c.initY + c.height - 1);
+					ws.addCell(l);
 				}
 			}
 			workbook.write();
@@ -94,7 +94,7 @@ public class FlexibleExcel {
 							case "initY" : c.initY = (int) jo.get(name); break;
 							case "width" : c.width = (int) jo.get(name); break;
 							case "height" : c.height = (int) jo.get(name); break;
-							case "content" : c.content = (String) jo.get(name); break;
+							case "content" : c.content =  jo.get(name).toString(); break;
 						}
 					}
 					sheet.add(c);
@@ -104,6 +104,19 @@ public class FlexibleExcel {
 		}
 		
 		return result;
+	}
+	
+	public static void main(String[] args)
+	{
+		String json = "{\"Sheet1\" : [{\"initX\" : 0, \"initY\" : 0, \"width\" : 2, \"height\" : 2, \"content\" : 1},"
+					+ "{\"initX\" : 2, \"initY\" : 0, \"width\" : 1, \"height\" : 1, \"content\" : 2},"
+					+ "{\"initX\" : 3, \"initY\" : 0, \"width\" : 1, \"height\" : 1, \"content\" : 3},"
+					+ "{\"initX\" : 2, \"initY\" : 1, \"width\" : 1, \"height\" : 1, \"content\" : 4},"
+					+ "{\"initX\" : 3, \"initY\" : 1, \"width\" : 1, \"height\" : 1, \"content\" : 5},"
+					+ "{\"initX\" : 0, \"initY\" : 2, \"width\" : 1, \"height\" : 1, \"content\" : 6},"
+					+ "{\"initX\" : 1, \"initY\" : 2, \"width\" : 1, \"height\" : 1, \"content\" : 7},"
+					+ "{\"initX\" : 2, \"initY\" : 2, \"width\" : 2, \"height\" : 1, \"content\" : 8}]}";
+		generate_flexible_excel(JSONObject.fromObject(json), "output");
 	}
 
 }
