@@ -32,11 +32,12 @@ public class FromDatabaseToExcelServelt extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String rawSql = request.getParameter("sql");
+		String path = request.getParameter("path");
 		String sql = new String(Base64.getDecoder().decode(rawSql));
-		String path = CreateExcel.create_excel(sql);
+		String filePath = CreateExcel.create_excel(sql, path);
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out=response.getWriter();
-		out.println(path);
+		out.println(filePath);
 		out.flush();
 		out.close();
 	}

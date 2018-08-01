@@ -6,6 +6,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.Properties;
+import java.util.ResourceBundle;
+import java.util.UUID;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import jxl.Workbook;
 import jxl.write.Label;
@@ -14,21 +25,15 @@ import jxl.write.WritableWorkbook;
 
 public class CreateExcel {
 	
-	public static String create_excel(String sql)
+	public static String create_excel(String sql, String relativePath)
 	{
 		WritableWorkbook workbook = null;
-		String fileName = "temp.xls";
-		File file = new File(fileName);
+		String fileName = UUID.randomUUID().toString() + ".xls";
+		String filePath = (relativePath == null || relativePath.equals("")) ? 
+				fileName : 
+				relativePath + File.separator + fileName;
+		File file = new File(filePath);
 		try {
-//			if (file.exists())
-//			{
-//				workbook = Workbook.createWorkbook(file, Workbook.getWorkbook(file));
-//			}
-//			else
-//			{
-//				file.createNewFile();
-//				workbook = Workbook.createWorkbook(file);
-//			}
 			file.createNewFile();
 			workbook = Workbook.createWorkbook(file);
 		} catch (Exception e) {
@@ -72,30 +77,43 @@ public class CreateExcel {
 			}
         }
 		
-		return file.getAbsolutePath();
+		return filePath;
 		
 	}
 	
-	private static Connection getConn() {
-	    String driver = "com.mysql.cj.jdbc.Driver";
-	    String url = "jdbc:mysql://localhost:3306/test?useSSL=true&serverTimezone=GMT%2B8";
-	    String username = "root";
-	    String password = "123456";
-	    Connection conn = null;
+	private static Connection getConn() {   
+		
 	    try {
-	        Class.forName(driver); 
-	        conn = (Connection) DriverManager.getConnection(url, username, password);
-	    } catch (ClassNotFoundException e) {
-	        e.printStackTrace();
-	    } catch (SQLException e) {
+	    	File f = new File("src" + File.separator + "config" + File.separator + "database_config.xml");   
+			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();   
+			DocumentBuilder builder = factory.newDocumentBuilder();   
+			Document doc = builder.parse(f);
+			NodeList nl = doc.getElementsByTagName("database_connect");
+			NodeList attrs = nl.item(0).getChildNodes();
+			String[] values = new String[4];
+            int count = 0;
+            for (int i = 0; i < attrs.getLength(); i++)
+            {
+            	if (attrs.item(i).getNodeType() == Node.ELEMENT_NODE)
+            	{
+            		values[count++] = attrs.item(i).getTextContent();
+            	}
+            }
+		    String driver = values[0];
+		    String url = values[1];
+		    String username = values[2];
+		    String password = values[3];
+	        Class.forName(driver);
+	        return (Connection) DriverManager.getConnection(url, username, password);
+	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
-	    return conn;
+	    return null;
 	}
 	
 	public static void main(String[] args)
 	{
-		System.out.println(new CreateExcel().create_excel("SELECT * FROM table_1;"));
+		System.out.println(CreateExcel.create_excel("SELECT * FROM table_1;", "output"));
 	}
 
 }
