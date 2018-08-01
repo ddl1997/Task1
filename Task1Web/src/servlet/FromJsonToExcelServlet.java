@@ -2,14 +2,11 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import method.CreateExcel;
 import method.JsonToExcel;
 import net.sf.json.JSONObject;
 
@@ -39,7 +36,7 @@ public class FromJsonToExcelServlet extends HttpServlet {
 		String filePath = JsonToExcel.json_to_excel(jo, path);
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out=response.getWriter();
-		out.println(path);
+		out.println(filePath);
 		out.flush();
 		out.close();
 	}

@@ -19,15 +19,6 @@ public class CreateExcel {
 		String fileName = "temp.xls";
 		File file = new File(fileName);
 		try {
-//			if (file.exists())
-//			{
-//				workbook = Workbook.createWorkbook(file, Workbook.getWorkbook(file));
-//			}
-//			else
-//			{
-//				file.createNewFile();
-//				workbook = Workbook.createWorkbook(file);
-//			}
 			file.createNewFile();
 			workbook = Workbook.createWorkbook(file);
 		} catch (Exception e) {
