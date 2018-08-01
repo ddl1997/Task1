@@ -23,7 +23,7 @@ public class CreateExcel {
 		WritableWorkbook workbook = null;
 		String fileName = UUID.randomUUID().toString() + ".xls";
 		String filePath = (relativePath == null || relativePath.equals("")) ? 
-				fileName : 
+				"output" + File.separator + fileName : 
 				relativePath + File.separator + fileName;
 		File file = new File(filePath);
 		try {
