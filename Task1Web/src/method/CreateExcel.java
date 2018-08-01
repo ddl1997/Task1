@@ -1,4 +1,5 @@
 package method;
+
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -30,7 +31,6 @@ public class CreateExcel {
 			file.createNewFile();
 			workbook = Workbook.createWorkbook(file);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -60,7 +60,6 @@ public class CreateExcel {
 			workbook.write();
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {

@@ -1,4 +1,5 @@
 package method;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -7,7 +8,6 @@ import jxl.Sheet;
 import jxl.Workbook;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-
 
 public class ExcelToJson {
 	
@@ -61,7 +61,6 @@ public class ExcelToJson {
 			InputStream is = new FileInputStream(excelpath);
 			System.out.println(excel_to_json(is));
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         
