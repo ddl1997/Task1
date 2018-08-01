@@ -34,8 +34,9 @@ public class FromJsonToExcelServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String json = request.getParameter("json");
+		String path = request.getParameter("path");
 		JSONObject jo = JSONObject.fromObject(json);
-		String path = JsonToExcel.json_to_excel(jo);
+		String filePath = JsonToExcel.json_to_excel(jo, path);
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out=response.getWriter();
 		out.println(path);

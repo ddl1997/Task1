@@ -87,19 +87,19 @@ public class ExcelToJson {
 		return result;
 	}
 	
-	public static void main(String[] args)
-	{
-		File file = new File("D:"+ File.separator +"1.xls");
-
-		String excelpath = file.getAbsolutePath();
-		try {
-			InputStream is = new FileInputStream(excelpath);
-			System.out.println(excel_to_json(is));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
-	}
+//	public static void main(String[] args)
+//	{
+//		File file = new File("D:"+ File.separator +"1.xls");
+//
+//		String excelpath = file.getAbsolutePath();
+//		try {
+//			InputStream is = new FileInputStream(excelpath);
+//			System.out.println(excel_to_json(is));
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//        
+//	}
 
 }
